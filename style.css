@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Learnova</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f6f8fb;color:#333;text-align:center;transition:0.5s;}
+body.dark{background:#121212;color:#eee;}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:white;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+body.dark header{background:#1e1e1e;}
+header h1{color:#5a67d8;font-weight:600;}
+section{margin-top:30px;padding:20px;}
+input,textarea{padding:10px 12px;border-radius:10px;border:1px solid #ddd;margin:8px;font-size:14px;outline:none;}
+input:focus{border-color:#7c8cff;}
+button{padding:10px 18px;border:none;border-radius:20px;background:#7c8cff;color:white;font-size:14px;cursor:pointer;transition:all 0.3s ease;margin:5px;}
+button:hover{background:#5a6de0;transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.1);}
+#calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:15px;margin-top:20px;}
+.card{background:white;padding:15px;border-radius:15px;box-shadow:0 6px 15px rgba(0,0,0,0.07);transition:0.3s;cursor:grab;min-height:100px;}
+body.dark .card{background:#2c2c2c;color:white;}
+.card:hover{transform:translateY(-5px);}
+.quiz button{background:#8bb6ff;}
+.quiz button:hover{background:#6a9df5;}
+.bar{background:#eee;height:10px;width:220px;border-radius:10px;margin:10px auto;}
+.fill{background:#7c8cff;height:10px;border-radius:10px;}
+.feedback textarea{width:260px;height:80px;}
+.feedbackItem{background:white;padding:10px;margin:10px auto;width:300px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+body.dark .feedbackItem{background:#2c2c2c;color:white;}
+.quote{font-style:italic;color:#555;}
+footer{margin-top:50px;padding:20px;background:#f1f3f7;color:#555;}
+body.dark footer{background:#1e1e1e;color:#ccc;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Learnova 📚</h1>
+<button id="darkBtn">🌙</button>
+</header>
+
+<section class="greeting">
+<h2>Hi! What is your name?</h2>
+<input type="text" id="userName" placeholder="Enter your name">
+<button onclick="submitName()">Submit</button>
+<p id="welcomeMsg"></p>
+</section>
+
+<section class="planner">
+<h2>Exam Planner</h2>
+<input type="number" id="days" placeholder="Days until exam">
+<input type="text" id="subjects" placeholder="Subjects (Math, Physics)">
+<input type="text" id="topics" placeholder="Topics (Limits, Motion)">
+<button onclick="generatePlan()">Generate Plan</button>
+<div id="calendar"></div>
+</section>
+
+<section class="focus">
+<h2>Focus Timer</h2>
+<input type="number" id="focusHours" placeholder="Hours studied continuously">
+<button onclick="focusSession()">Submit Focus</button>
+<p id="focusSuggestion"></p>
+</section>
+
+<section class="quiz">
+<h2>Quick Quiz</h2>
+<p>What is i²?</p>
+<button onclick="answerQuiz('-1')">-1</button>
+<button onclick="answerQuiz('1')">1</button>
+<p id="quizResult"></p>
+
+<p>Which language runs in browser?</p>
+<button onclick="answerQuiz2('JavaScript')">JavaScript</button>
+<button onclick="answerQuiz2('Python')">Python</button>
+<p id="quizResult2"></p>
+</section>
+
+<section class="progress">
+<h2>Study Progress</h2>
+<input type="text" id="subjectName" placeholder="Subject">
+<input type="number" id="hours" placeholder="Hours studied">
+<button onclick="addProgress()">Add Study Time</button>
+<div id="progressOutput"></div>
+</section>
+
+<section class="feedback">
+<h2>Feedback</h2>
+<textarea id="feedbackBox" placeholder="Write your feedback..."></textarea><br>
+<button onclick="sendFeedback()">Submit</button>
+<div id="feedbackList"></div>
+</section>
+
+<section class="quote">
+<h2>Motivation</h2>
+<p id="quoteText"></p>
+<button onclick="newQuote()">New Quote</button>
+</section>
+
+<section class="future">
+<h2>Future Updates</h2>
+<p>More study materials and resources will be uploaded soon 🚀</p>
+</section>
+
+<footer>
+<p>Created by Yanshika Sharma • Sneha Kumari • Preeti Bhandari</p>
+</footer>
+
+<script>
+// Dark Mode
+const darkBtn=document.getElementById("darkBtn");
+darkBtn.addEventListener("click",()=>{
+document.body.classList.toggle("dark");
+darkBtn.textContent=document.body.classList.contains("dark")?"🌞":"🌙";
+});
+
+// Greeting
+function submitName(){
+let name=document.getElementById("userName").value;
+if(name) document.getElementById("welcomeMsg").textContent=`Hi ${name}! Welcome to Learnova 📚`;
+else alert("Please enter your name!");
+}
+
+// Planner with drag & drop
+let dragged=null;
+function generatePlan(){
+let days=parseInt(document.getElementById("days").value);
+let subjects=document.getElementById("subjects").value.split(",");
+let topics=document.getElementById("topics").value.split(",");
+if(!days || subjects.length===0 || topics.length===0){alert("Fill all fields"); return;}
+
+let calendar=document.getElementById("calendar");
+calendar.innerHTML="";
+
+for(let i=0;i<days;i++){
+let date=new Date(); date.setDate(date.getDate()+i);
+let subj=subjects[i%subjects.length].trim();
+let topc=topics[i%topics.length].trim();
+let hours=prompt(`How many hours for ${topc} (${subj}) on ${date.toDateString()}?`,Math.floor(Math.random()*3)+1);
+
+let card=document.createElement("div");
+card.className="card";
+card.draggable=true;
+card.innerHTML=`<h3>${date.toDateString()}</h3>
+<p><b>Subject:</b> ${subj}</p>
+<p><b>Topic:</b> ${topc}</p>
+<p><b>Study:</b> ${hours} hrs</p>`;
+calendar.appendChild(card);
+
+// Drag events
+card.addEventListener("dragstart",()=>{dragged=card;});
+card.addEventListener("dragover",e=>e.preventDefault());
+card.addEventListener("drop",()=>{calendar.insertBefore(dragged,card);});
+}
+}
+
+// Focus timer
+function focusSession(){
+let hrs=document.getElementById("focusHours").value;
+if(!hrs){alert("Enter hours"); return;}
+let sug="";
+if(hrs<=1) sug="Good job! Take a 5-10 min break 🧘‍♀️";
+else if(hrs<=2) sug="Great focus! Take a 15 min break 🌿";
+else sug="Long focus session! Take a 30 min break and hydrate 💧";
+document.getElementById("focusSuggestion").textContent=sug;
+}
+
+// Quiz
+function answerQuiz(ans){document.getElementById("quizResult").textContent=ans=="-1"?"Correct ✅":"Wrong ❌";}
+function answerQuiz2(ans){document.getElementById("quizResult2").textContent=ans=="JavaScript"?"Correct ✅":"Wrong ❌";}
+
+// Progress
+let progress={};
+function addProgress(){
+let subject=document.getElementById("subjectName").value;
+let hours=document.getElementById("hours").value;
+if(!subject||!hours){alert("Fill subject & hours");return;}
+if(progress[subject]) progress[subject]+=Number(hours);
+else progress[subject]=Number(hours);
+let output="";
+for(let s in progress){
+output+=`<p>${s}</p><div class="bar"><div class="fill" style="width:${progress[s]*10}px"></div></div>`;
+}
+document.getElementById("progressOutput").innerHTML=output;
+}
+
+// Feedback
+function sendFeedback(){
+let comment=document.getElementById("feedbackBox").value;
+if(!comment){alert("Write something");return;}
+let list=document.getElementById("feedbackList");
+let item=document.createElement("p");
+item.className="feedbackItem";
+item.textContent=comment;
+list.appendChild(item);
+document.getElementById("feedbackBox").value="";
+}
+
+// Motivation
+const quotes=["Push yourself because no one else will.","Small progress is still progress.","Consistency beats motivation.","Your future self will thank you.","Dream big. Study smart."];
+function newQuote(){let r=Math.floor(Math.random()*quotes.length); document.getElementById("quoteText").innerText=quotes[r];}
+newQuote();
+</script>
+
+</body>
+</html>
