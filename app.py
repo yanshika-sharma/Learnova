@@ -99,7 +99,7 @@ def quiz():
     if answer == "-1":
         result = "Correct! i² = -1"
     else:
-        result = "Wrong Answer. Try again. We know you can do better."
+        result = "Wrong Answer. Try again. We know you can do better buddy!"
 
     return jsonify({"result": result})
 
