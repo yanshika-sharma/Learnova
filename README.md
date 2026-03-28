@@ -17,3 +17,28 @@ Personalized learning support
 User-friendly interface
 How It Works
 User enters a question or topic.
+
+
+Learnova processes the input using AI.
+
+The system generates:
+
+Clear explanation
+
+Key points
+
+Practice questions
+
+User can ask follow-up questions for deeper understanding.
+
+Future Enhancements
+
+Voice-based interaction
+
+Multi-language support
+
+Student performance tracking
+
+Mobile app version
+
+AI-based quiz & test
