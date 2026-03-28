@@ -7,17 +7,13 @@ feedback_list = []
 study_progress = {}
 
 
-# -----------------------------
-# Home Page
-# -----------------------------
+
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# -----------------------------
-# Exam Study Planner
-# -----------------------------
+
 @app.route("/planner", methods=["POST"])
 def planner():
 
@@ -40,7 +36,7 @@ def planner():
 
         subject = subjects[subject_index]
 
-        # Study hours logic
+        
         if i < 2:
             hours = 6
         elif i < 5:
@@ -62,9 +58,7 @@ def planner():
     return jsonify(plan)
 
 
-# -----------------------------
-# Feedback System
-# -----------------------------
+
 @app.route("/feedback", methods=["POST"])
 def feedback():
 
@@ -77,9 +71,7 @@ def feedback():
     return jsonify(feedback_list)
 
 
-# -----------------------------
-# Study Progress Tracker
-# -----------------------------
+
 @app.route("/progress", methods=["POST"])
 def progress():
 
@@ -96,9 +88,7 @@ def progress():
     return jsonify(study_progress)
 
 
-# -----------------------------
-# Quiz Answer Check
-# -----------------------------
+
 @app.route("/quiz", methods=["POST"])
 def quiz():
 
@@ -114,8 +104,5 @@ def quiz():
     return jsonify({"result": result})
 
 
-# -----------------------------
-# Run Server
-# -----------------------------
 if __name__ == "__main__":
     app.run(debug=True)
