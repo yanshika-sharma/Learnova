@@ -44,4 +44,4 @@ Mobile app version
 AI-based quiz & test
 
 Study planning:
-Learnova will ask you to tell it the subject, study hours and the topics , then it will generate a planner seeking your permission about how many hours you have to study about that ceratin topic in a day.  
+Learnova will ask you to tell it the subject, study hours and the topics , then it will generate a planner seeking your permission about how many hours you have to study about that ceratin topic in a day..
