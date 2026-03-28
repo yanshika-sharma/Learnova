@@ -23,25 +23,25 @@ Learnova processes the input using AI.
 
 The system generates:
 
-Clear explanation
+1.Clear explanation
 
-Key points
+2.Key points
 
-Practice questions
+3.Practice questions
 
-User can ask follow-up questions for deeper understanding.
+4.User can ask follow-up questions for deeper understanding.
 
-Future Enhancements
+5.Future Enhancements
 
-Voice-based interaction
+6.Voice-based interaction
 
-Multi-language support
+7.Multi-language support
 
-Student performance tracking
+8.Student performance tracking
 
-Mobile app version
+9.Mobile app version
 
-AI-based quiz & test
+10.AI-based quiz & test
 
 Study planning:
 Learnova will ask you to tell it the subject, study hours and the topics , then it will generate a planner seeking your permission about how many hours you have to study about that ceratin topic in a day..
