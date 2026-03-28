@@ -47,4 +47,4 @@ Study planning:
 Learnova will ask you to tell it the subject, study hours and the topics , then it will generate a planner seeking your permission about how many hours you have to study about that ceratin topic in a day. 
 
 Why Learnova is better then other similar platforms ?
-We gets frustrated when advertisements comes while studying but when studying through this platform ,ther ewill be zero advertisements.
+We gets frustrated when advertisements comes while studying but when we will study through this platform ,there will be zero advertisements.
