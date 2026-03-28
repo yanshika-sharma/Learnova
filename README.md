@@ -48,3 +48,5 @@ Learnova will ask you to tell it the subject, study hours and the topics , then 
 
 Why Learnova is better then other similar platforms ?
 We gets frustrated when advertisements comes while studying but when we will study through this platform ,there will be zero advertisements.
+
+And we don't want the students to feel pressurised at all, so there will be 15 minutes break between study hours for the students to refresh their minds.
